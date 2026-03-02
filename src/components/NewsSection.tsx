@@ -1,5 +1,9 @@
 import Link from "next/link";
-import { getBunnyNews } from "@/lib/news";
+import type { BunnyNewsItem } from "@/lib/news";
+
+type NewsSectionProps = {
+  newsItems: BunnyNewsItem[];
+};
 
 const formatDate = (dateText: string) => {
   const date = new Date(dateText);
@@ -15,9 +19,7 @@ const formatDate = (dateText: string) => {
   }).format(date);
 };
 
-export default async function NewsSection() {
-  const newsItems = await getBunnyNews();
-
+export default function NewsSection({ newsItems }: NewsSectionProps) {
   return (
     <section id="news" className="rounded-3xl border border-meadow-100 bg-white p-6 shadow-soft md:p-8">
       <div className="flex flex-wrap items-center justify-between gap-3">

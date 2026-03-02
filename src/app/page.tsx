@@ -3,6 +3,7 @@ import BreedCarousel from "@/components/BreedCarousel";
 import NewsSection from "@/components/NewsSection";
 import TopNav from "@/components/TopNav";
 import { bunnyBreeds, dietGuides } from "@/data/bunnies";
+import { getBunnyNews } from "@/lib/news";
 
 export const revalidate = 1800;
 
@@ -42,8 +43,9 @@ const insightBlocks = [
   }
 ];
 
-export default function Home() {
+export default async function Home() {
   const featured = bunnyBreeds[0];
+  const newsItems = await getBunnyNews();
 
   return (
     <>
@@ -130,7 +132,7 @@ export default function Home() {
         </section>
 
         <BreedCarousel breeds={bunnyBreeds} />
-        <NewsSection />
+        <NewsSection newsItems={newsItems} />
 
         <section id="diet" className="rounded-3xl border border-meadow-100 bg-white p-6 shadow-soft md:p-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
